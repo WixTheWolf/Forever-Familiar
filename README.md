@@ -1,4 +1,4 @@
-# Forever Familiar — Production v6
+# Forever Familiar — Production v7
 
 A browser-first digital pet memorial business with a paid-access gate verified against Stripe Checkout.
 
@@ -53,7 +53,6 @@ Before sending public traffic:
 ## Privacy model
 
 The studio is delivered after Stripe verifies payment. The pet photo and typed memories are then processed locally in the customer's browser. The current implementation does not upload those inputs to Forever Familiar.
-
 
 ## Public asset inventory
 - `assets/cover.webp` — hero product presentation
