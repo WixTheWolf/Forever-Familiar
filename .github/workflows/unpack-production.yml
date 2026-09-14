@@ -1,0 +1,56 @@
+name: Unpack Forever Familiar Production
+
+on:
+  push:
+    paths:
+      - 'Forever_Familiar_Production_v7.zip'
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Unpack production site
+        run: |
+          set -e
+          rm -rf .unpack
+          mkdir .unpack
+          unzip -q -o Forever_Familiar_Production_v7.zip -d .unpack
+
+          # The ZIP may contain either a top-level project folder or files directly.
+          ROOT=".unpack"
+          if [ -d ".unpack/Forever_Familiar_Production_v7" ]; then
+            ROOT=".unpack/Forever_Familiar_Production_v7"
+          fi
+
+          # Keep GitHub's workflow and repository metadata, replace production files.
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name '.git' \
+            ! -name '.github' \
+            ! -name '.unpack' \
+            ! -name 'Forever_Familiar_Production_v7.zip' \
+            -exec rm -rf {} +
+
+          cp -a "$ROOT"/. .
+          rm -rf .unpack
+          rm -f Forever_Familiar_Production_v7.zip
+          rm -rf .git
+
+      - name: Commit production files
+        run: |
+          git config user.name "Forever Familiar Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Deploy Forever Familiar production v7"
+          git push
