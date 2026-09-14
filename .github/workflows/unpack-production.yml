@@ -24,13 +24,11 @@ jobs:
           mkdir .unpack
           unzip -q -o Forever_Familiar_Production_v7.zip -d .unpack
 
-          # The ZIP may contain either a top-level project folder or files directly.
           ROOT=".unpack"
           if [ -d ".unpack/Forever_Familiar_Production_v7" ]; then
             ROOT=".unpack/Forever_Familiar_Production_v7"
           fi
 
-          # Keep GitHub's workflow and repository metadata, replace production files.
           find . -mindepth 1 -maxdepth 1 \
             ! -name '.git' \
             ! -name '.github' \
@@ -41,7 +39,6 @@ jobs:
           cp -a "$ROOT"/. .
           rm -rf .unpack
           rm -f Forever_Familiar_Production_v7.zip
-          rm -rf .git
 
       - name: Commit production files
         run: |
