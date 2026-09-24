@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /success
 Disallow: /api/
-Sitemap: https://foreverfamiliar.com/sitemap.xml
+Sitemap: https://www.foreverfamiliar.com/sitemap.xml
