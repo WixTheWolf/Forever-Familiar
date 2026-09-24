@@ -65,3 +65,6 @@ The studio is delivered after Stripe verifies payment. The pet photo and typed m
 - `media/pinterest/*.jpg` — six discovery creatives
 - `media/partners/forever-familiar-partner-one-pager.png` — partner handout
 - `media.html` — public gallery that exposes all customer-facing media and examples
+
+## Pre-checkout story intake
+Customers now add 1–3 photos and tribute details on `/start` before paying. The draft is stored locally in the browser as `ff_tribute_draft_v2`, survives the Stripe round trip on the same device/browser, and pre-fills the paid studio after Stripe verifies the Checkout Session.
